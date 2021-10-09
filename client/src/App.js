@@ -56,6 +56,7 @@ class App extends Component{
               <TableCell>이미지</TableCell>
               <TableCell>이름</TableCell>
               <TableCell>생년월일</TableCell>
+              <TableCell>성별</TableCell>
               <TableCell>직업</TableCell>
             </TableRow>
             </TableHead>
@@ -70,6 +71,7 @@ class App extends Component{
               name={c.name}
               birthday={c.birthday}
               gender={c.gender}
+              job={c.job}
               />
             )
           })
