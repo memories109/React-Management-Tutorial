@@ -5,10 +5,10 @@ class CustomerAdd extends Component {
 
     constructor(props){
         super(props);
-        this.stats = {
+        this.state = {
             file : null,
             userName: '',
-            birtheday: '',
+            birthday: '',
             gender: '',
             job: '',
             fileName: ''
@@ -21,13 +21,27 @@ class CustomerAdd extends Component {
         .then((response) => {
             console.log(response.data);
         })
+        
+        this.setState({
+            file: null,
+            userName: '',
+            birthday: '',
+            gender: '',
+            job:'',
+            fileName:''
+        })
+        // window.location.reload();
     }
 
     handleFileChange = (e) => {
+        console.log('in handlefilechange');
+        console.log(this.state.file);
         this.setState({
             file: e.target.files[0],
             fileName: e.target.value
         })
+        console.log('end ');
+        console.log(this.state.file);
     }
 
     handleValueChange = (e) => {
@@ -39,14 +53,14 @@ class CustomerAdd extends Component {
     addCustomer = () => {
         const url = '/api/customers';
         const formData = new FormData();
-        formData.append('image', this.stats.file);
-        formData.append('name', this.stats.userName);
-        formData.append('birthday', this.stats.birthday);
-        formData.append('gender', this.stats.gender);
-        formData.append('job', this.stats.job);
+        formData.append('image', this.state.file);
+        formData.append('name', this.state.userName);
+        formData.append('birthday', this.state.birthday);
+        formData.append('gender', this.state.gender);
+        formData.append('job', this.state.job);
         const config = {
             headers : { 
-                'content-type' : 'multipart/form-data'
+                'content-type': 'multipart/form-data'
             }
         }
         return post(url, formData, config);
@@ -57,11 +71,11 @@ class CustomerAdd extends Component {
         return (
             <form onSubmit={this.handleFormSubmit}>
                 <h1>고객 추가</h1>
-                프로필 이미지 : <input type="file" name="file" file={this.stats.file} value={this.stats.fileName} onChange={this.handleFileChange}/><br/>
-                이름 : <input type="text" name="userName" value={this.stats.userName} onChange={this.handleValueChange}/><br/>
-                생년월일 : <input type="text" name="birthday" value={this.stats.birtheday} onChange={this.handleValueChange}/><br/>
-                성별 : <input type="text" name="gender" value={this.stats.gender} onChange={this.handleValueChange}/> <br/>
-                직업 : <input type="text" name="job" value={this.stats.job} onChange={this.handleValueChange}/> <br/>
+                프로필 이미지 : <input type="file" name="file" file={this.state.file} value={this.state.fileName} onChange={this.handleFileChange}/><br/>
+                이름 : <input type="text" name="userName" value={this.state.userName} onChange={this.handleValueChange}/><br/>
+                생년월일 : <input type="text" name="birthday" value={this.state.birthday} onChange={this.handleValueChange}/><br/>
+                성별 : <input type="text" name="gender" value={this.state.gender} onChange={this.handleValueChange}/> <br/>
+                직업 : <input type="text" name="job" value={this.state.job} onChange={this.handleValueChange}/> <br/>
                 <button type="submit">추가하기</button>
             </form>
         )
