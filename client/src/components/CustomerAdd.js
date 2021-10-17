@@ -7,6 +7,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { withStyles} from '@material-ui/core/styles';
+import { ThemeProvider, unstable_createMuiStrictModeTheme } from '@material-ui/core';
+
+const theme = unstable_createMuiStrictModeTheme();
+
 
 const styles = theme => ({
     hidden: {
@@ -100,7 +104,7 @@ class CustomerAdd extends Component {
         const { classes } = this.props;
         return (
             
-            <div> 
+            <ThemeProvider theme={theme}> 
                 <Button variant="contained" color="primary" onClick={this.handleClickOpen}>
                 고객 추가하기 
                 </Button>
@@ -124,7 +128,7 @@ class CustomerAdd extends Component {
                         <Button variant="outlined" color="primary" onClick={this.handleClose}>닫기</Button>
                     </DialogActions>
                 </Dialog>
-            </div>
+            </ThemeProvider>
         )
     }
 } 
