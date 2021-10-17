@@ -20,7 +20,8 @@ class CustomerAdd extends Component {
         this.addCustomer()
         .then((response) => {
             console.log(response.data);
-        })
+            this.props.stateRefresh();
+        }) 
         
         this.setState({
             file: null,
@@ -30,18 +31,14 @@ class CustomerAdd extends Component {
             job:'',
             fileName:''
         })
-        // window.location.reload();
+        
     }
 
     handleFileChange = (e) => {
-        console.log('in handlefilechange');
-        console.log(this.state.file);
         this.setState({
             file: e.target.files[0],
             fileName: e.target.value
         })
-        console.log('end ');
-        console.log(this.state.file);
     }
 
     handleValueChange = (e) => {
